@@ -78,6 +78,7 @@ class MyData{
 		add_settings_field( 'md_youtube', 'YouTube', array($this,'md_youtube_callback'), 'my_data_page', 'social_info_section');
 		add_settings_field( 'md_twitter', 'Twitter', array($this,'md_twitter_callback'), 'my_data_page', 'social_info_section');
 		add_settings_field( 'md_google_plus', 'Google Plus', array($this,'md_google_plus_callback'), 'my_data_page', 'social_info_section');
+		add_settings_field( 'md_pinterest', 'Google Plus', array($this,'md_pinterest_callback'), 'my_data_page', 'social_info_section');
 		
 		add_settings_section( 'logos_section', 'Logos', array($this,'general_info_section_callback'), 'my_data_page' );
 		add_settings_field( 'md_header_logo', 'Logo Cabeçalho', array($this,'md_header_logo_callback'), 'my_data_page', 'logos_section');
@@ -209,6 +210,13 @@ class MyData{
 		);
 	}
 
+	public function md_pinterest_callback(){
+		printf(
+			'<input type="text" id="md_pinterest" class="regular-text" name="md_options[md_pinterest]" value="%s">',
+			isset($this->options['md_pinterest']) ? $this->options['md_pinterest'] : ''
+		);
+	}
+
 	//Logos Fields
 
 	public function md_header_logo_callback(){
@@ -320,9 +328,21 @@ class MyData{
 	   </div>
 	   <?php
 	 }
+
+	public function get_social(){
+		$info = get_option('idc_options');
+        $snw = array();
+        $snw['facebook'] = isset($info['md_facebook']) ? $info['md_facebook'] : '';
+        $snw['instagram'] = isset($info['md_instagram']) ? $info['md_instagram'] : '';
+        $snw['youtube'] = isset($info['md_youtube']) ? $info['md_youtube'] : '';
+        $snw['twitter'] = isset($info['md_twitter']) ? $info['md_twitter'] : '';
+        $snw['google-plus'] = isset($info['md_google_plus']) ? $info['md_google_plus'] : '';
+        return $snw;
+	}
 }
 
-new MyData();
+global $mydata;
+$mydata = new MyData();
 
 
  ?>
