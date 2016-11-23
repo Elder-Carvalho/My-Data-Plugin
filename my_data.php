@@ -21,6 +21,7 @@ class MyData{
 		add_action('admin_init', array($this,'md_init'));
 		add_action('admin_notices', array($this,'admin_notices'));
 		$this->load_depencencies();
+		$this->options = get_option('md_options');
 	}
 
 	public function load_depencencies(){
@@ -35,7 +36,6 @@ class MyData{
 		if ( !current_user_can( 'manage_options' ) )  {
 			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 		}
-		$this->options = get_option('md_options');
 		?>
 
 		<div class="wrap">
@@ -78,7 +78,7 @@ class MyData{
 		add_settings_field( 'md_youtube', 'YouTube', array($this,'md_youtube_callback'), 'my_data_page', 'social_info_section');
 		add_settings_field( 'md_twitter', 'Twitter', array($this,'md_twitter_callback'), 'my_data_page', 'social_info_section');
 		add_settings_field( 'md_google_plus', 'Google Plus', array($this,'md_google_plus_callback'), 'my_data_page', 'social_info_section');
-		add_settings_field( 'md_pinterest', 'Google Plus', array($this,'md_pinterest_callback'), 'my_data_page', 'social_info_section');
+		add_settings_field( 'md_pinterest', 'Pinterest', array($this,'md_pinterest_callback'), 'my_data_page', 'social_info_section');
 		
 		add_settings_section( 'logos_section', 'Logos', array($this,'general_info_section_callback'), 'my_data_page' );
 		add_settings_field( 'md_header_logo', 'Logo Cabeçalho', array($this,'md_header_logo_callback'), 'my_data_page', 'logos_section');
@@ -277,7 +277,7 @@ class MyData{
 			</div>
 		<?php
 			else:
-				echo '<p>É necessário inserir uma chave de api para visualizar o mapa. <a href="' . admin_url('admin.php?page=md_settings_page') . '" >Opções</a> </p>';
+				echo '<p>É necessário inserir uma chave de api para visualizar a localização no mapa. Ir para <a href="' . admin_url('admin.php?page=md_settings_page') . '" >Opções</a> </p>';
 			endif;
 
 	}
@@ -290,7 +290,7 @@ class MyData{
         wp_enqueue_style('md-style',plugins_url('css/md_style.css',__FILE__));	
 	}
 
-	//This method is useful when you move the site to another server
+	//This methods are useful when you move the site to another server
 	private function checkHost($logoUrl,$local){
 		$host = get_option('home');
 
@@ -329,14 +329,39 @@ class MyData{
 	   <?php
 	 }
 
-	public function get_social(){
-		$info = get_option('idc_options');
+	 //GETTERS
+
+	 public function __get($prop){
+	 	if(!empty($this->options['md_'.$prop]) and  $this->options['md_'.$prop] != ''){
+	 		return $this->options['md_'.$prop];
+	 	}
+	 }
+
+	public function get_social($html = FALSE, $class = ''){
+		$info = $this->options;
         $snw = array();
         $snw['facebook'] = isset($info['md_facebook']) ? $info['md_facebook'] : '';
         $snw['instagram'] = isset($info['md_instagram']) ? $info['md_instagram'] : '';
         $snw['youtube'] = isset($info['md_youtube']) ? $info['md_youtube'] : '';
         $snw['twitter'] = isset($info['md_twitter']) ? $info['md_twitter'] : '';
         $snw['google-plus'] = isset($info['md_google_plus']) ? $info['md_google_plus'] : '';
+        $snw['pinterest'] = isset($info['md_pinterest']) ? $info['md_pinterest'] : '';
+
+        if($html){
+        	$social_list = '<ul class="social-list '.$class.'">';
+        	foreach($snw as $name => $url){
+        		if($url != ''){
+        			$social_list .= '<li>
+        								<a href="' . $url . '">
+        									<i class="fa fa-' . $name . '" aria-hidden="true"></i>
+        								</a>
+        							</li>'; 	
+        		}
+        	}
+        	$social_list .= '</ul>';
+        	echo $social_list;
+        	return;
+        }
         return $snw;
 	}
 }
