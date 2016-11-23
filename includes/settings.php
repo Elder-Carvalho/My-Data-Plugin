@@ -29,6 +29,43 @@ class MyDataSettings{
 					submit_button();
 				 ?>
 			</form>
+			<h2>Ajuda</h2>
+			<h4>Variáveis</h4>
+			<p>
+				<code>global mydata;</code><br>
+				<code>echo $mydata->name</code><br>
+				<code>echo $mydata->address</code><br>
+				<code>echo $mydata->city</code><br>
+				<code>echo $mydata->state</code><br>
+				<code>echo $mydata->cep</code><br>
+				<code>echo $mydata->phones</code><br>
+				<code>echo $mydata->whatsapp</code><br>
+				<code>echo $mydata->email</code><br>
+				<code>echo $mydata->schedule_business</code><br>
+				<code>echo $mydata->schedule_weekend</code><br>
+				<code>echo $mydata->schedule_other</code><br>
+				<code>echo $mydata->facebook</code><br>
+				<code>echo $mydata->instagram</code><br>
+				<code>echo $mydata->youtube</code><br>
+				<code>echo $mydata->twitter</code><br>
+				<code>echo $mydata->google_plus</code><br>
+				<code>echo $mydata->pinterest</code><br>
+				<code>echo $mydata->header_logo</code><br>
+				<code>echo $mydata->google_maps</code>
+			</p>
+			<h4>Funções</h4>
+			<p>
+				<code>mydata->get_social($html,$class);</code><br>
+				Retorna um array de url's indexados pelo nome da rede social.
+			</p>
+			<p><strong>$html</strong> - Padrão: FALSE<br>
+			Imprime uma lista de redes sociais com ícones Font Awesome.</p>
+			<p><strong>$class</strong> - Padrão: ''<br>
+			Classe css para a lista.</p>
+			<p>
+				<code>mydata->get_phones($html,$class);</code><br>
+				Retorna um array de telefones.
+			</p>
 		</div>
 
 

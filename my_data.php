@@ -364,6 +364,10 @@ class MyData{
         }
         return $snw;
 	}
+
+	public function get_phones(){
+		return $phones = explode('|', $this->options['md_phones']);
+	}
 }
 
 global $mydata;
