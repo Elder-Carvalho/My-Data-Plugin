@@ -13,7 +13,6 @@ Domain Path: /languages
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 class MyData{
-
 	private $options;
 
 	public function __construct(){
