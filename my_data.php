@@ -365,8 +365,8 @@ class MyData{
         return $snw;
 	}
 
-	public function get_phones(){
-		return $phones = explode('|', $this->options['md_phones']);
+	public function get_phones($delimiter){
+		return $phones = explode($delimiter, $this->options['md_phones']);
 	}
 }
 
