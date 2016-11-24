@@ -6,7 +6,7 @@
  *
  * @since 0.1.0
  */
-function renderMediaUploader($,logo,id) {
+function renderMediaUploader($,logo) {
     'use strict';
  
     var file_frame, image_data,json;
@@ -72,10 +72,6 @@ function renderMediaUploader($,logo,id) {
          $('#set-' + logo ).addClass('hidden');
          $('#remove-' + logo ).removeClass('hidden');
 
-
-
-
-
     });
  
     // Now display the actual file_frame
@@ -83,7 +79,7 @@ function renderMediaUploader($,logo,id) {
  
 }
 
-function removeLogo($,logo,id){
+function removeLogo($,logo){
 	$('.' + logo + '_img').addClass('hidden');
 	$('#'+logo).val('');
 	$('#set-' + logo ).removeClass('hidden');
@@ -99,8 +95,7 @@ function removeLogo($,logo,id){
             // Stop the anchor's default behavior
             evt.preventDefault();
 
-            var logo = $(this).data('logo'),
-           		id = $(this).attr('id');
+            var logo = $(this).data('logo');
 
             // Display the media uploader
             renderMediaUploader($,logo,id);
@@ -108,11 +103,10 @@ function removeLogo($,logo,id){
         });
  
 	    $('.remove-logo').on( 'click', function( evt ) {
-	    	var logo = $(this).data('logo'),
-	    		id = $(this).attr('id');
+            evt.preventDefault();
+	    	var logo = $(this).data('logo');
 	     	removeLogo($,logo,id);
 	    });
-
 
         $('#md_google_maps').on('keyup', function(event) {
             event.preventDefault();
@@ -122,11 +116,9 @@ function removeLogo($,logo,id){
                 var cutsrc = src.substring(0,pos);
 
                 src = cutsrc + 'q=' + $(this).val();
-
-                //console.log(src);
                 
                 $('.localization iframe').attr('src',src) ;
-               }
+            }
         });
 
     });
