@@ -29,7 +29,7 @@ class MyData{
 	}
 
 	public function md_create_menu(){
-		add_menu_page( 'Meus Dados', 'Meus Dados', 'manage_options', 'my_data_page', array($this,'md_options'),'dashicons-portfolio',absint(80));
+		add_menu_page( 'Meus Dados', 'Meus Dados', 'manage_options', 'my_data_page', array($this,'md_options'),'dashicons-portfolio',absint(79));
 	}
 
 	public function md_options(){

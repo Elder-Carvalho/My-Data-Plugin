@@ -63,7 +63,7 @@ class MyDataSettings{
 			<p><strong>$class</strong> - Padrão: ''<br>
 			Classe css para a lista.</p>
 			<p>
-				<code>mydata->get_phones($html,$class);</code><br>
+				<code>mydata->get_phones();</code><br>
 				Retorna um array de telefones.
 			</p>
 		</div>
