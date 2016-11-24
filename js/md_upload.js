@@ -98,14 +98,14 @@ function removeLogo($,logo){
             var logo = $(this).data('logo');
 
             // Display the media uploader
-            renderMediaUploader($,logo,id);
+            renderMediaUploader($,logo);
  
         });
  
 	    $('.remove-logo').on( 'click', function( evt ) {
-            evt.preventDefault();
+            //evt.preventDefault();
 	    	var logo = $(this).data('logo');
-	     	removeLogo($,logo,id);
+	     	removeLogo($,logo);
 	    });
 
         $('#md_google_maps').on('keyup', function(event) {
