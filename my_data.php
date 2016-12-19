@@ -22,6 +22,7 @@ class MyData{
 		add_action('admin_notices', array($this,'admin_notices'));
 		$this->load_depencencies();
 		$this->options = get_option('md_options');
+		//$this->loadLogos();
 	}
 
 	public function load_depencencies(){
@@ -265,7 +266,7 @@ class MyData{
 		// $details = json_decode(file_get_contents("http://ipinfo.io/{$ip}/json"));
 
 		$settings = get_option('md_settings');
-		if($this->options['md_google_maps']){ $localization = $this->options['md_google_maps']; }else{ $localization = 'Manaus';}
+		if($this->options['md_google_maps'] != ''){ $localization = $this->options['md_google_maps']; }else{ $localization = 'Manaus';}
 		?>
 			<input type="text" id="md_google_maps" class="large-text" name="md_options[md_google_maps]" value="<?php echo $localization ?>">
 			<?php if($settings['md_google_api_key']): ?>
@@ -305,13 +306,11 @@ class MyData{
 
 			return $realUrl;
 		}
-
 		return $logoUrl;
 	}
 
 	private function loadLogos(){
 		if(!is_admin()){
-			$this->options = get_option('md_options');
 			$this->options['md_header_logo'] = $this->checkHost($this->options['md_header_logo'],'header');
 			$this->options['md_footer_logo'] = $this->checkHost($this->options['md_footer_logo'],'footer');
 			update_option( 'md_options', $this->md_options );
@@ -352,7 +351,7 @@ class MyData{
         	foreach($snw as $name => $url){
         		if($url != ''){
         			$social_list .= '<li>
-        								<a href="' . $url . '">
+        								<a href="' . $url . '" target="_blank">
         									<i class="fa fa-' . $name . '" aria-hidden="true"></i>
         								</a>
         							</li>'; 	
@@ -367,6 +366,11 @@ class MyData{
 
 	public function get_phones($delimiter){
 		return $phones = explode($delimiter, $this->options['md_phones']);
+	}
+
+	public function get_api_key(){
+		$settings = get_option('md_settings');
+		return $settings['md_google_api_key'];
 	}
 }
 
