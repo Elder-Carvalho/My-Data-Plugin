@@ -80,6 +80,7 @@ class MyData{
 		add_settings_field( 'md_twitter', 'Twitter', array($this,'md_twitter_callback'), 'my_data_page', 'social_info_section');
 		add_settings_field( 'md_google_plus', 'Google Plus', array($this,'md_google_plus_callback'), 'my_data_page', 'social_info_section');
 		add_settings_field( 'md_pinterest', 'Pinterest', array($this,'md_pinterest_callback'), 'my_data_page', 'social_info_section');
+		add_settings_field( 'md_linkedin', 'LinkedIn', array($this,'md_linkedin_callback'), 'my_data_page', 'social_info_section');
 		
 		add_settings_section( 'logos_section', 'Logos', array($this,'general_info_section_callback'), 'my_data_page' );
 		add_settings_field( 'md_header_logo', 'Logo Cabeçalho', array($this,'md_header_logo_callback'), 'my_data_page', 'logos_section');
@@ -218,6 +219,13 @@ class MyData{
 		);
 	}
 
+	public function md_linkedin_callback(){
+		printf(
+			'<input type="text" id="md_linkedin" class="regular-text" name="md_options[md_linkedin]" value="%s">',
+			isset($this->options['md_linkedin']) ? $this->options['md_linkedin'] : ''
+		);
+	}
+
 	//Logos Fields
 
 	public function md_header_logo_callback(){
@@ -345,6 +353,7 @@ class MyData{
         $snw['twitter'] = isset($info['md_twitter']) ? $info['md_twitter'] : '';
         $snw['google-plus'] = isset($info['md_google_plus']) ? $info['md_google_plus'] : '';
         $snw['pinterest'] = isset($info['md_pinterest']) ? $info['md_pinterest'] : '';
+        $snw['linkedin'] = isset($info['md_linkedin']) ? $info['md_linkedin'] : '';
 
         if($html){
         	$social_list = '<ul class="social-list '.$class.'">';
@@ -352,7 +361,7 @@ class MyData{
         		if($url != ''){
         			$social_list .= '<li>
         								<a href="' . $url . '" target="_blank">
-        									<i class="fa fa-' . $name . '" aria-hidden="true"></i>
+        									<i class="fa fa-fw fa-' . $name . '" aria-hidden="true"></i>
         								</a>
         							</li>'; 	
         		}
