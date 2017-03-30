@@ -60,6 +60,7 @@ class MyData{
 
 		add_settings_section( 'general_info_section', 'Informações Gerais', array($this,'general_info_section_callback'), 'my_data_page' );
 		add_settings_field( 'md_name', 'Nome', array($this,'md_name_callback'), 'my_data_page', 'general_info_section');
+		add_settings_field( 'md_description', 'Descrição', array($this,'md_description_callback'), 'my_data_page', 'general_info_section');
 		add_settings_field( 'md_address', 'Endereço', array($this,'md_address_callback'), 'my_data_page', 'general_info_section');
 		add_settings_field( 'md_city', 'Cidade', array($this,'md_city_callback'), 'my_data_page', 'general_info_section');
 		add_settings_field( 'md_state', 'Estado', array($this,'md_state_callback'), 'my_data_page', 'general_info_section');
@@ -100,6 +101,13 @@ class MyData{
 		printf(
 			'<input type="text" id="md_name" class="regular-text" name="md_options[md_name]" value="%s">',
 			isset($this->options['md_name']) ? $this->options['md_name'] : ''
+		);
+	}
+
+	public function md_description_callback(){
+		printf(
+			'<textarea rows="8" type="text" id="md_description" class="regular-text" name="md_options[md_description]">%s</textarea>',
+			isset($this->options['md_description']) ? $this->options['md_description'] : ''
 		);
 	}
 
